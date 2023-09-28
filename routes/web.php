@@ -36,3 +36,6 @@ Route::get('/edit', function () {
 Route::get('/details/index/{note}', [NotesController::class,"show"]);
 
 Route::post('/post',[NotesController::class,'newnote']);
+Route::post('/post/{note}',[NotesController::class,'destroy']);
+Route::get('/edit/{note}',[NotesController::class,'edit']);
+Route::put('/edit/{note}',[NotesController::class,'update']);
