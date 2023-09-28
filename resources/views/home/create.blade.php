@@ -8,13 +8,18 @@
                 <div class="col-md-9">
                     <form action="/post" method="post">
                         @csrf
-                        <label for="">Title:</label>
-                        <input type="text" class="form-control" name="title">
-                        <label for="">Deskripsi</label>
-                        <input type="text" class="form-control" name="title">
-                        <button
-                            type="submit" class="btn btn-lg btn-primary">Submit
-                        </button>
+                        <label for="title">Title:</label>
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title">
+                        @error('title')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                        <label for="content">Content</label>
+                        <textarea type="text" rows="3" class="form-control h-8" name="content" id="content"></textarea>
+                        
+                        
+                        <button type="submit" class="btn btn-lg btn-primary mt-2">Save</button>
                     </form>
                 </div>
             </div>
