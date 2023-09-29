@@ -6,7 +6,7 @@
         <div class="container-fluid p-4">
             <div class="row justify-content-md-center">
                 <div class="col-md-9">
-                    <form action="/post" method="post">
+                    <form action="/notes" method="post">
                         @csrf
                         <label for="title">Title:</label>
                         <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title">

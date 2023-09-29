@@ -1,29 +1,25 @@
 <?php
 
-
-
 namespace App\Http\Controllers;
 
-
-
 use Illuminate\Http\Request;
-use App\Models\notes;
-
-
+use App\Models\Notes;
+use Illuminate\Support\Facades\Auth;
 
 class NotesController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+        $notes = $user->notes;
+
         return view('home/index', [
             "title" => "Notes",
-            "notes" => notes::all(),
+            "notes" => $notes,
         ]);
     }
 
-
-
-    public function show(notes $note)
+    public function show(Notes $note)
     {
         return view('details/index', [
             "title" => "A Note",
@@ -31,7 +27,10 @@ class NotesController extends Controller
         ]);
     }
 
-
+    public function create()
+    {
+        return view('home.create');
+    }
 
     public function newnote(Request $request)
     {
@@ -40,26 +39,20 @@ class NotesController extends Controller
             'content' => 'max:255',
         ]);
 
-
-
-        notes::create($validatedData);
-
-
-
+        $user = Auth::user();
+        $note = new Notes($validatedData);
+        $user->notes()->save($note);
+        
         return redirect('/')->with('success', 'New Note has been added');
     }
 
-
-
-    public function destroy(notes $note)
+    public function destroy(Notes $note)
     {
-        notes::destroy($note->id);
+        $note->delete();
         return redirect('/')->with('success', 'Note has been deleted');
     }
 
-
-
-    public function edit(notes $note)
+    public function edit(Notes $note)
     {
         return view('home/edit', [
             "title" => "Edit Note",
@@ -67,26 +60,15 @@ class NotesController extends Controller
         ]);
     }
 
-
-
-    public function update(Request $request, notes $note)
+    public function update(Request $request, Notes $note)
     {
         $rules = [
             'title' => 'required|max:255',
             'content' => 'max:255',
         ];
 
-
-
         $updatedData = $request->validate($rules);
-
-
-
-        notes::where('id', $note->id)
-            ->update($updatedData);
-
-
-
+        $note->update($updatedData);
         return redirect('/')->with('success', 'Note has been updated');
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotesController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,28 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/register', function () {
-    return view('register');
-});
 
-    
-Route::get('/',[NotesController::class,'index']);
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');;
+Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/create', function () {
-    return view('home/create');
-});
 
-Route::get('/edit', function () {
-    return view('home/edit');
-});
+Route::get('/', [NotesController::class, 'index'])->middleware('auth');
+Route::get('/details/index/{note}', [NotesController::class, "show"])->middleware('auth');
+Route::get('/create', [NotesController::class, 'create'])->middleware('auth');
 
-Route::get('/details/index/{note}', [NotesController::class,"show"]);
 
-Route::post('/post',[NotesController::class,'newnote']);
-Route::post('/post/{note}',[NotesController::class,'destroy']);
-Route::get('/edit/{note}',[NotesController::class,'edit']);
-Route::put('/edit/{note}',[NotesController::class,'update']);
+Route::post('/notes', [NotesController::class, 'newnote']);
+Route::delete('/notes/{note}', [NotesController::class, 'destroy']);
+Route::get('/notes/{note}', [NotesController::class, 'edit']);
+Route::put('/notes/{note}', [NotesController::class, 'update']);

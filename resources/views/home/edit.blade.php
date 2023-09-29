@@ -6,7 +6,7 @@
             <div class="container-fluid p-4">
                 <div class="row justify-content-md-center">
                     <div class="col-md-9">
-                        <form method="POST" action="/edit/{{ $note->id }}">
+                        <form method="POST" action="/notes/{{ $note->id }}">
                             @method('PUT')
                             @csrf
                             <label for="title">Title:</label>

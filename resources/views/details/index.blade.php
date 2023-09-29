@@ -7,7 +7,7 @@
                 <div class="d-flex justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">{{ $note['title'] }}</h6>
                     <div class="d-flex">
-                        <form action="/edit/{{ $note->id }}" class="m-2">
+                        <form action="/notes/{{ $note->id }}" class="m-2">
                             @csrf
                             <button class="border-0 bg-transparent"><svg xmlns="http://www.w3.org/2000/svg" height="1em"
                                     viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -16,8 +16,8 @@
                                 </svg></button>
                         </form>
 
-                        <form action="/post/{{ $note->id }}" method="post" class="m-2">
-                            @method('post')
+                        <form action="/notes/{{ $note->id }}" method="post" class="m-2">
+                            @method('DELETE')
                             @csrf
                             <button class="border-0 bg-transparent" onclick="return confirm('Are You Sure?')"><svg
                                     xmlns="http://www.w3.org/2000/svg" height="1em"
@@ -30,7 +30,7 @@
                 </div>
                 <div class="card-body">
                     <div class="container-fluid d-flex justify-content-end">
-                        <div class="">Created : {{ $note['created_at'] }}</div>
+                        <div class="">Created : {{ $note['created_at']->format('D, d/m/Y') }}</div>
                     </div>
                     <div class="container">
                         <p>{{ $note['content'] }}<a target="_blank" rel="nofollow" href="#">
