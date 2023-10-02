@@ -13,10 +13,8 @@
                             <input type="text" class="form-control" name="title" id="title"
                                 value="{{ $note->title }}">
 
-                            <label for="content">Content:</label>
-                            <input type="text" class="form-control" name="content" id="content"
-                                value="{{ $note->content }}">
-
+                            <label for="content m">Content:</label>
+                            <textarea type="text" rows="3" class="form-control h-8" name="content" id="content">{{ $note->content }}</textarea>
                             <button type="submit" class="btn btn-lg btn-primary m-2">Submit</button>
                         </form>
                     </div>

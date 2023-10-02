@@ -12,17 +12,15 @@ class NotesController extends Controller
     {
         $user = Auth::user();
         $notes = $user->notes;
-
-        return view('home/index', [
-            "title" => "Notes",
+        
+        return view('home.index', [
             "notes" => $notes,
         ]);
     }
 
     public function show(Notes $note)
     {
-        return view('details/index', [
-            "title" => "A Note",
+        return view('details.index', [
             "note" => $note,
         ]);
     }
@@ -42,7 +40,7 @@ class NotesController extends Controller
         $user = Auth::user();
         $note = new Notes($validatedData);
         $user->notes()->save($note);
-        
+
         return redirect('/')->with('success', 'New Note has been added');
     }
 
@@ -54,8 +52,7 @@ class NotesController extends Controller
 
     public function edit(Notes $note)
     {
-        return view('home/edit', [
-            "title" => "Edit Note",
+        return view('home.edit', [
             "note" => $note,
         ]);
     }
