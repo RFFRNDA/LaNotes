@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'deni@gmail.com',
             'password' => bcrypt('123456'),
         ]);
-        
+
         User::create([
             'name' => 'Billy',
             'email' => 'billy@gmail.com',
@@ -48,26 +48,26 @@ class DatabaseSeeder extends Seeder
 
         Notes::create([
             'user_id' => '1',
-            'title'=> 'Welcome Deni',
-            'content'=> 'Ini adalah catatan Deni',
+            'title' => 'Welcome Deni',
+            'content' => 'Ini adalah catatan Deni',
         ]);
-        
+
         Notes::create([
             'user_id' => '2',
-            'title'=> 'Welcome Billy',
-            'content'=> 'Ini adalah catatan Billy',
+            'title' => 'Welcome Billy',
+            'content' => 'Ini adalah catatan Billy',
         ]);
 
         Notes::create([
             'user_id' => '3',
-            'title'=> 'Welcome Rafif',
-            'content'=> 'Ini adalah catatan Rafif Fernanda',
+            'title' => 'Welcome Rafif',
+            'content' => 'Ini adalah catatan Rafif Fernanda',
         ]);
 
         Notes::create([
             'user_id' => '4',
-            'title'=> 'Welcome Tigor',
-            'content'=> 'Ini adalah catatan Tigor',
+            'title' => 'Welcome Tigor',
+            'content' => 'Ini adalah catatan Tigor',
         ]);
 
 

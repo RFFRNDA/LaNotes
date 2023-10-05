@@ -11,11 +11,33 @@ class NotesController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $notes = $user->notes;
-        
+        $notes = $user->notes()->where('archived', false)->get();
+
         return view('home.index', [
             "notes" => $notes,
         ]);
+    }
+
+    public function archived()
+    {
+        $user = Auth::user();
+        $archivedNotes = $user->notes()->where('archived', true)->get();
+
+        return view('home.archived', [
+            "notes" => $archivedNotes,
+        ]);
+    }
+
+    public function makeArchived(Notes $note)
+    {
+        $note->update(['archived' => true]);
+        return redirect('/');
+    }
+
+    public function unArchive(Notes $note)
+    {
+        $note->update(['archived' => false]);
+        return redirect('archived');
     }
 
     public function show(Notes $note)

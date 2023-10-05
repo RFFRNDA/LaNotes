@@ -28,9 +28,13 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/', [NotesController::class, 'index'])->middleware('auth');
 Route::get('/details/index/{note}', [NotesController::class, "show"])->middleware('auth');
 Route::get('/create', [NotesController::class, 'create'])->middleware('auth');
+Route::get('/archived', [NotesController::class, 'archived'])->middleware('auth');
+Route::get('/notes/{note}', [NotesController::class, 'edit']);
 
 
 Route::post('/notes', [NotesController::class, 'newnote']);
 Route::delete('/notes/{note}', [NotesController::class, 'destroy']);
-Route::get('/notes/{note}', [NotesController::class, 'edit']);
 Route::put('/notes/{note}', [NotesController::class, 'update']);
+
+Route::post('/archived/{note}', [NotesController::class, 'makeArchived']);
+Route::put('/archived/{note}', [NotesController::class, 'unArchive']);

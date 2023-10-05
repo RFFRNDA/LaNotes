@@ -1,8 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
+    <h2 class="mt-3 mb-3">Archived Note</h2>
     @if ($notes->isEmpty())
-        <div class="text-center m-5">Empty, there are no notes.</div>
+        <div class="text-center m-5">Empty, there are no archived notes.</div>
     @else
         @foreach ($notes as $note)
         <div class="col-lg-12 mb-4">
