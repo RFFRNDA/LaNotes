@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->text('title');
-            $table->text('content')->nullable();
+            $table->string('title');
+            $table->string('content')->nullable();
             $table->boolean('archived')->default(false);
             $table->timestamps();
         });
